@@ -387,11 +387,17 @@ class WhatsAppInstance {
     async forwardMessage(to, message) {
         console.log(message)
         await this.verifyId(this.getWhatsAppId(to))
-        const data = await this.instance.sock?.sendMessage(
-            this.getWhatsAppId(to),
-            { forward: message }
-        )
-        return data
+        try {
+            const data = await this.instance.sock?.sendMessage(
+                this.getWhatsAppId(to),
+                { forward: message }
+            )
+            console.log(data)
+            return data
+        } catch (err) {
+            console.log(err)
+        }
+        return {}
     }
 
     async sendMediaFile(to, file, type, caption = '', filename) {
