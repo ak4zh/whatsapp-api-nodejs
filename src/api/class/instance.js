@@ -205,8 +205,8 @@ class WhatsAppInstance {
 
         // on new mssage
         sock?.ev.on('messages.upsert', async (m) => {
-            console.log('messages.upsert')
-            console.log(m)
+            // console.log('messages.upsert')
+            // console.log(m)
             if (m.type === 'prepend')
                 this.instance.messages.unshift(...m.messages)
             if (m.type !== 'notify') return
@@ -230,6 +230,7 @@ class WhatsAppInstance {
             this.instance.messages.unshift(...m.messages)
 
             m.messages.map(async (msg) => {
+                console.log(msg)
                 if (!msg.message) return
 
                 const messageType = Object.keys(msg.message)[0]
