@@ -1,3 +1,11 @@
+exports.Forward = async (req, res) => {
+    const data = await WhatsAppInstances[req.query.key].forwardMessage(
+        req.body.id,
+        req.body.message
+    )
+    return res.status(201).json({ error: false, data: data })
+}
+
 exports.Text = async (req, res) => {
     const data = await WhatsAppInstances[req.query.key].sendTextMessage(
         req.body.id,
