@@ -213,14 +213,18 @@ class WhatsAppInstance {
 
             // https://adiwajshing.github.io/Baileys/#reading-messages
             if (config.markMessagesRead) {
-                const unreadMessages = m.messages.map(msg => {
-                    return {
-                        remoteJid: msg.key.remoteJid,
-                        id: msg.key.id,
-                        participant: msg.key?.participant
-                    }
-                })
-                await sock.readMessages(unreadMessages)
+                try {
+                    const unreadMessages = m.messages.map(msg => {
+                        return {
+                            remoteJid: msg.key.remoteJid,
+                            id: msg.key.id,
+                            participant: msg.key?.participant
+                        }
+                    })
+                    await sock.readMessages(unreadMessages)    
+                } catch (err) {
+                    console.log(err)
+                }
             }
 
             this.instance.messages.unshift(...m.messages)
@@ -229,6 +233,7 @@ class WhatsAppInstance {
                 if (!msg.message) return
 
                 const messageType = Object.keys(msg.message)[0]
+                console.log(messageType)
                 if (
                     [
                         'protocolMessage',
