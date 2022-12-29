@@ -445,7 +445,7 @@ class WhatsAppInstance {
                 templateButtons: processButton(data.buttons),
                 text: data.text ?? '',
                 footer: data.footerText ?? '',
-                viewOnce: true
+                viewOnce: data?.viewOnce
             }
         )
         return result
@@ -476,7 +476,7 @@ class WhatsAppInstance {
                 buttonText: data.buttonText,
                 footer: data.description,
                 title: data.title,
-                viewOnce: true
+                viewOnce: data?.viewOnce
             }
         )
         return result
@@ -495,7 +495,7 @@ class WhatsAppInstance {
                 caption: data.text,
                 templateButtons: processButton(data.buttons),
                 mimetype: data.mimeType,
-                viewOnce: true
+                viewOnce: data?.viewOnce
             }
         )
         return result
