@@ -205,8 +205,8 @@ class WhatsAppInstance {
 
         // on new mssage
         sock?.ev.on('messages.upsert', async (m) => {
-            console.log('messages.upsert')
-            console.log(m)
+            // console.log('messages.upsert')
+            // console.log(m)
             if (m.type === 'prepend')
                 this.instance.messages.unshift(...m.messages)
             if (m.type !== 'notify') return
@@ -230,11 +230,9 @@ class WhatsAppInstance {
             this.instance.messages.unshift(...m.messages)
 
             m.messages.map(async (msg) => {
-                console.log(msg)
                 if (!msg.message) return
 
                 const messageType = Object.keys(msg.message)[0]
-                console.log(messageType)
                 if (
                     [
                         'protocolMessage',
@@ -282,8 +280,8 @@ class WhatsAppInstance {
         })
 
         sock?.ev.on('messages.update', async (messages) => {
-            //console.log('messages.update')
-            //console.dir(messages);
+            console.log('messages.update')
+            console.dir(messages);
         })
         sock?.ws.on('CB:call', async (data) => {
             if (data.content) {
@@ -387,6 +385,7 @@ class WhatsAppInstance {
     }
 
     async forwardMessage(to, message) {
+        console.log(message)
         await this.verifyId(this.getWhatsAppId(to))
         const data = await this.instance.sock?.sendMessage(
             this.getWhatsAppId(to),
